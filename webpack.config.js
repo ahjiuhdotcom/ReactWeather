@@ -1,8 +1,33 @@
 // Naming 'webpack.config.js' is important
 
+var webpack = require('webpack');
+
 module.exports = {
   // import
-  entry: './app/app.jsx',
+  // script file not neccessary package for webpack
+  // thus need to put 'script!' (script loader npm module) before the file path
+  entry: [
+    'script!jquery/dist/jquery.min.js',
+    'script!foundation-sites/dist/foundation.min.js',
+    './app/app.jsx'
+  ],
+  // provide set of key value pairs
+  // key is module name, value is the variable name we want available
+  // inside the external script file
+  // 'foundation' use term 'jQuery' in its method for its jquery obejct
+  externals: {
+    jquery: 'jQuery'
+  },
+  // define the global variables name
+  // key is the variable name to watch for
+  // value is the module to replace it with
+  // e.g. whenever see '$', it refer to 'jquery'
+  plugins: [
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery'
+    })
+  ],
   // export
   output: {
     path: __dirname, // '__dirname' means current directory
