@@ -15,6 +15,9 @@ require('style!css!foundation-sites/dist/foundation.min.css')
 // use jquery to select the document and call the foundation method
 $(document).foundation();
 
+// App css
+require('style!css!applicationStyles')
+
 // What to render by react-dom
 // document.getElementById('app') is the location to render the component
 ReactDOM.render(
