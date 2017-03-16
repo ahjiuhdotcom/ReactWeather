@@ -16,7 +16,7 @@ require('style!css!foundation-sites/dist/foundation.min.css')
 $(document).foundation();
 
 // App css
-require('style!css!applicationStyles')
+require('style!css!sass!applicationStyles')
 
 // What to render by react-dom
 // document.getElementById('app') is the location to render the component
