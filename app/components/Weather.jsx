@@ -16,10 +16,12 @@ var Weather = React.createClass({
     // alert('Searching ', location);
 
     var that = this;
-
+    // set to 'undefined' just to clear up the data b4 new search
     this.setState({
       isLoading: true,
-      errorMessage: undefined
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined,
     });
 
     openWeatherMap.getTemp(location).then(function(data){
@@ -37,6 +39,39 @@ var Weather = React.createClass({
         errorMessage: errorMessage.message
       });
     });
+  },
+  componentDidMount: function(){
+
+    // When click the city name in the "Example",
+    // It will redirect to '/' with some query string pass togather
+
+    // 'this.props.location': is an object call 'location'
+    // try to console.log 'this.props' for details
+    // 'query.location' is query string in the url
+    var location = this.props.location.query.location;
+    // If there is query string pass thru url,
+    // e.g when click the city name in the "Example"
+    if (location && location.length > 0) {
+      this.handleSearch(location);
+      // to remove location query string after handleSearch
+      window.location.hash = '#/';
+    }
+  },
+  // this function will trigger if there is any update/changes in th props
+  // parent component can always update a child's props
+  // In this case, react-router automatic update the props in Weather.jsx when url change
+  // so child component need to set listen to that change
+  // for this case it, url was changed from Nav component
+  componentWillReceiveProps: function(newProps){
+
+    // newProps is refer to those newly change props
+    var location = newProps.location.query.location;
+
+    if (location && location.length > 0) {
+      this.handleSearch(location);
+      // to remove location query string after handleSearch
+      window.location.hash = '#/';
+    }
   },
   render: function() {
 
