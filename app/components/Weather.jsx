@@ -60,11 +60,12 @@ var Weather = React.createClass({
   // this function will trigger if there is any update/changes in th props
   // parent component can always update a child's props
   // In this case, react-router automatic update the props in Weather.jsx when url change
-  // so child component need to set listen to that change
-  // for this case it, url was changed from Nav component
+  // so child component need to set listen to that changes
+  // for this case, url was updated from Nav component
   componentWillReceiveProps: function(newProps){
 
     // newProps is refer to those newly change props
+    // why newProps.location? try to console.log to see what is inside
     var location = newProps.location.query.location;
 
     if (location && location.length > 0) {

@@ -12,8 +12,10 @@ var Nav = React.createClass({
     if (location.length > 0) {
       this.refs.search.value = '';
       // to add the 'encodedLocation' to location query string
-      // then redirect to that url
+      // react-router will receive this changes, then redirect to that url
       // this will not re-render the component if this happen at the same page
+      // unless the target component listen the changes with 'componentWillReceiveProps'
+      // In this case, Weather component will listen to this changes
       window.location.hash = '#/?location=' + encodedLocation;
     }
   },
